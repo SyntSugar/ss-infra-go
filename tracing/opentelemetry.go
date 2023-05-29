@@ -74,7 +74,7 @@ func InitOTLProvider(config *OTLConfig) (func() error, error) {
 			otlptracegrpc.WithDialOption(grpc.WithBlock()),
 		)
 	} else {
-		traceExporter, err = otlptrace.New(context.Background(),
+		traceExporter, err = otlptrace.New(ctx,
 			otlptracehttp.NewClient(
 				otlptracehttp.WithEndpoint(config.Endpoint),
 				otlptracehttp.WithInsecure(),
