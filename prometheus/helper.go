@@ -13,10 +13,10 @@ func NewHistogramHelper(ns, subsystem, name string, buckets []float64, labels ..
 	subsystem = strings.ReplaceAll(subsystem, "-", "_")
 	name = strings.ReplaceAll(name, "-", "_")
 	opts := prometheus.HistogramOpts{}
-	opts.Namespace = ns
-	opts.Subsystem = subsystem
 	opts.Name = name
 	opts.Help = name
+	opts.Namespace = ns
+	opts.Subsystem = subsystem
 	opts.Buckets = buckets
 	histogram := prometheus.NewHistogramVec(opts, labels)
 	prometheus.MustRegister(histogram)
@@ -28,10 +28,10 @@ func NewCounterHelper(ns, subsystem, name string, labels ...string) *prometheus.
 	ns = strings.ReplaceAll(ns, "-", "_")
 	subsystem = strings.ReplaceAll(subsystem, "-", "_")
 	opts := prometheus.CounterOpts{}
-	opts.Namespace = ns
-	opts.Subsystem = subsystem
 	opts.Name = name
 	opts.Help = name
+	opts.Namespace = ns
+	opts.Subsystem = subsystem
 	counters := prometheus.NewCounterVec(opts, labels)
 	prometheus.MustRegister(counters)
 	return counters
@@ -40,10 +40,10 @@ func NewCounterHelper(ns, subsystem, name string, labels ...string) *prometheus.
 // NewGaugeHelper was used to fast create and register prometheus gauge metric
 func NewGaugeHelper(ns, subsystem, name string, labels ...string) *prometheus.GaugeVec {
 	opts := prometheus.GaugeOpts{}
-	opts.Namespace = strings.ReplaceAll(ns, "-", "_")
-	opts.Subsystem = strings.ReplaceAll(subsystem, "-", "_")
 	opts.Name = name
 	opts.Help = name
+	opts.Namespace = strings.ReplaceAll(ns, "-", "_")
+	opts.Subsystem = strings.ReplaceAll(subsystem, "-", "_")
 	gauge := prometheus.NewGaugeVec(opts, labels)
 	prometheus.MustRegister(gauge)
 	return gauge
@@ -70,10 +70,10 @@ func NewSummaryHelper(ns, subsystem, name string, ageBuckets, bufCap uint32, max
 // DefaultSummaryHelper was used to fast create and register prometheus summary metric with default
 func DefaultSummaryHelper(ns, subsystem, name string, labels ...string) *prometheus.SummaryVec {
 	opts := prometheus.SummaryOpts{
-		Namespace: strings.ReplaceAll(ns, "-", "_"),
-		Subsystem: strings.ReplaceAll(subsystem, "-", "_"),
 		Name:      name,
 		Help:      name,
+		Namespace: strings.ReplaceAll(ns, "-", "_"),
+		Subsystem: strings.ReplaceAll(subsystem, "-", "_"),
 	}
 	summary := prometheus.NewSummaryVec(opts, labels)
 	prometheus.MustRegister(summary)
