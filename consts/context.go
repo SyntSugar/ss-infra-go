@@ -1,9 +1,11 @@
 package consts
 
+type ContextKey string
+
 const (
-	ContextKeyTraceID            = "traceID"
-	ContextKeyCloudflareRay      = "cloudflareRay"
-	ContextKeyRequestPath        = "requestPath"
-	ContextKeyEnableDebugLogging = "enableDebugLog"
-	ContextKeyMetricLabel        = "metricLabel"
+	ContextKeyTraceID            ContextKey = "traceID"
+	ContextKeyCloudflareRay      ContextKey = "cloudflareRay"
+	ContextKeyRequestPath        ContextKey = "requestPath"
+	ContextKeyEnableDebugLogging ContextKey = "enableDebugLog"
+	ContextKeyMetricLabel        ContextKey = "metricLabel"
 )

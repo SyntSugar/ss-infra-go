@@ -6,6 +6,7 @@ const (
 	HeaderEnableDebugLogging = "Enable-Debug-Log"
 
 	KeyAMTraceID          = "am_trace_id"
+	KeyCloudflareRay      = "cloudflare_ray"
 	KeyEnableDebugLogging = "enable_debug_log"
 
 	OtelDefaultTracerName = "default"
