@@ -3,18 +3,14 @@ package consts
 const (
 	HeaderAMTraceID          = "am-trace-id"
 	HeaderXCloudTraceContext = "x-cloud-trace-context"
-	HeaderCloudflareRay      = "CF-Ray"
 	HeaderEnableDebugLogging = "Enable-Debug-Log"
 
 	KeyAMTraceID          = "am_trace_id"
-	KeyCloudflareRay      = "cloudflare_ray"
 	KeyEnableDebugLogging = "enable_debug_log"
 
-	OtelDefaultTracerName             = "default"
-	OtelDefaultSpanNamePubSubProducer = "PubSub Publish"
-	OtelDefaultSpanNamePubSubConsumer = "PubSub Consume"
+	OtelDefaultTracerName = "default"
 
-	DefaultAccessLogPattern = `%{2006-01-02T15:04:05.999-0700}t "%{CF-Ray}i" "${AM-Trace-ID}" ` +
+	DefaultAccessLogPattern = `%{2021-11-07T15:04:05.999-0700}t "%{CF-Ray}i" "${AM-Trace-ID}" ` +
 		`%a %A %{Host}i "%r" %s - %T "%{X-Real-IP}i" "%{X-Forwarded-For}i" ` +
 		`%{Content-Length}i - %{Content-Length}o %b`
 	JSONAccessLogPattern = `{"message": "AccessLogger %r %s [${AM-Trace-ID}]",` +
