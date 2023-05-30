@@ -76,6 +76,7 @@ var code2Description = map[int]Description{
 	},
 }
 
+// HttpCodeDescription returns the description of the http code.
 func HttpCodeDescription(code int) Description {
 	return code2Description[code]
 }

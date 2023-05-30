@@ -2,7 +2,9 @@ package server
 
 import (
 	"errors"
+	"time"
 
+	"github.com/SyntSugar/ss-infra-go/consts"
 	"github.com/SyntSugar/ss-infra-go/tracing"
 )
 
@@ -30,12 +32,17 @@ type Config struct {
 	API           *APICfg            `mapstructure:"api"`
 	Admin         *AdminCfg          `mapstructure:"admin"`
 	OpenTelemetry *tracing.OTLConfig `mapstructure:"opentelemetry"`
+	AccessLog     AccessLogCfg       `mapstructure:"access_log"`
+	Shutdown      time.Duration      `mapstructure:"shutdown"`
 }
 
 func DefaultConfig() *Config {
 	return &Config{
 		API:   &APICfg{Addr: defaultAPIAddr},
 		Admin: &AdminCfg{Addr: defaultAdminAddr},
+		AccessLog: AccessLogCfg{
+			Pattern: consts.DefaultAccessLogPattern,
+		},
 	}
 }
 
