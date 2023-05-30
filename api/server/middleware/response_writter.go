@@ -51,6 +51,9 @@ func (w *responseWriterImpl) reset(writer http.ResponseWriter) {
 }
 
 // WriteHeader writes the status code and updates the first byte time if not already set.
+// WriteHeader must call before the first call to Write. Because when call Write, WirteHeader
+// will no effect unless the HTTP status code was of the 1xx class or the modified headers are trailers.
+// See https://pkg.go.dev/net/http#ResponseWriter.
 func (w *responseWriterImpl) WriteHeader(code int) {
 	if code > 0 && w.status != code {
 		w.ResponseWriter.WriteHeader(code)
@@ -63,10 +66,13 @@ func (w *responseWriterImpl) WriteHeader(code int) {
 
 // Write writes the data and updates the size and first byte time if not already set.
 func (w *responseWriterImpl) Write(data []byte) (n int, err error) {
-	if w.firstByteTime.IsZero() {
+	if w.status == 0 {
 		w.WriteHeader(http.StatusOK)
 	}
 	n, err = w.ResponseWriter.Write(data)
+	if w.size == noWritten {
+		w.size = 0
+	}
 	w.size += n
 	return
 }

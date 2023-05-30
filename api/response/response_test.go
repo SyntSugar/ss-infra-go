@@ -78,7 +78,7 @@ func TestResponseWithErrors(t *testing.T) {
 }
 
 func TestUnmarshalResponse(t *testing.T) {
-	data := map[string]string{"foo": "bar"}
+	data := "foo bar"
 	response := &Response{
 		Meta: Meta{
 			Code:    http.StatusOK,
@@ -90,6 +90,7 @@ func TestUnmarshalResponse(t *testing.T) {
 
 	bytes, err := json.Marshal(response)
 	assert.Nil(t, err)
+	response.bytes = bytes
 
 	unmarshaledResponse, err := UnmarshalResponse(bytes)
 	assert.Nil(t, err)
@@ -107,8 +108,13 @@ func TestGetData(t *testing.T) {
 		Data: data,
 	}
 
+	bytes, err := json.Marshal(response)
+	assert.Nil(t, err)
+
+	response.bytes = bytes
+
 	var receivedData map[string]string
-	err := response.GetData(&receivedData)
+	err = response.GetData(&receivedData)
 	assert.Nil(t, err)
 	assert.Equal(t, data, receivedData)
 }
