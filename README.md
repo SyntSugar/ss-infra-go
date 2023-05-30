@@ -9,7 +9,7 @@ This repository provides a unified and streamlined approach to creating Go proje
 - [x] response
 - [x] config
 - [x] mysql
-- [ ] redis
+- [x] redis
 
 # Install
 ```go get https://github.com/SyntSugar/ss-infra-go```
