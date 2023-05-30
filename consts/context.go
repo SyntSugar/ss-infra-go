@@ -11,4 +11,6 @@ const (
 	ContextKeyRequestPath        ContextKey = "requestPath"
 	ContextKeyEnableDebugLogging ContextKey = "enableDebugLog"
 	ContextKeyMetricLabel        ContextKey = "metricLabel"
+	ContextStartTimeKey          ContextKey = "startTime"
+	ContextSegmentKey            ContextKey = "segment"
 )

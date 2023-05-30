@@ -8,7 +8,7 @@ This repository provides a unified and streamlined approach to creating Go proje
 - [x] log/access log
 - [x] response
 - [x] config
-- [ ] nosql
+- [x] mysql
 - [ ] redis
 
 # Install
