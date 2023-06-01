@@ -32,6 +32,6 @@ func setupMetrics() {
 	}
 }
 
-func init() {
+func Init() {
 	setupMetrics()
 }
