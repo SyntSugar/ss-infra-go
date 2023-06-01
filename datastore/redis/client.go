@@ -19,25 +19,25 @@ type Options struct {
 	EnabledOtelTrace bool
 }
 
-func DefaultOptions() *Options {
+func DefaultOptions(options *Options) *Options {
 	return &Options{
 		Options: &redis.Options{
+			Addr:         options.Addr,
+			Password:     options.Password,
+			DB:           options.DB,
 			DialTimeout:  1200 * time.Millisecond,
 			ReadTimeout:  1500 * time.Millisecond,
 			WriteTimeout: time.Second,
 			MinIdleConns: runtime.NumCPU(),
+			PoolTimeout: 1200 * time.Millisecond,
 		},
 		EnabledOtelMetric: true,
 		EnabledOtelTrace:  false,
 	}
 }
 
-
-
 func NewClient(options *Options) *redis.Client {
-	if options == nil {
-		options = DefaultOptions()
-	}
+	options = DefaultOptions(options)
 
 	rdb := redis.NewClient(options.Options)
 
