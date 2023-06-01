@@ -12,7 +12,7 @@ This repository provides a unified and streamlined approach to creating Go proje
 - [x] redis
 
 # Install
-```go get https://github.com/SyntSugar/ss-infra-go```
+```go get github.com/SyntSugar/ss-infra-go```
 
 # More about syntsugar
 Welcome to follow our github repos.
