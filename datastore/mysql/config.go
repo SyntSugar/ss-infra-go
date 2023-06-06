@@ -32,7 +32,7 @@ func (cfg *Config) init() {
 	cfg.WriteTimeout = 5 * time.Second
 	cfg.MaxOpenConns = 0
 	cfg.MaxIdleConns = 16
-	cfg.Charset = "utf8"
+	cfg.Charset = "utf8mb4"
 }
 
 func (cfg *Config) validate() error {
