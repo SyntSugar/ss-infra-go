@@ -10,7 +10,7 @@ type Description struct {
 var code2Description = map[int]Description{
 	20000: {
 		Status:  "OK",
-		Message: "The request was successfully processed by AfterShip.",
+		Message: "The request was successfully processed by SS.",
 	},
 	20100: {
 		Status:  "Created",
@@ -72,7 +72,7 @@ var code2Description = map[int]Description{
 	},
 	50000: {
 		Status:  "InternalError",
-		Message: "Something went wrong on AfterShip's end. Also, some error that cannot be retried happened on an external system that this call relies on.",
+		Message: "Something went wrong on SS's end. Also, some error that cannot be retried happened on an external system that this call relies on.",
 	},
 }
 
