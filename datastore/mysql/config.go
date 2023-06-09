@@ -32,6 +32,7 @@ func (cfg *Config) init() {
 	cfg.WriteTimeout = 5 * time.Second
 	cfg.MaxOpenConns = 0
 	cfg.MaxIdleConns = 16
+	cfg.EnableParseTime = true
 	cfg.Charset = "utf8mb4"
 }
 
