@@ -24,13 +24,17 @@ var (
 
 var ErrNil = errors.New("the value is null")
 
-func NewLogger(loglevel, encoding string, samplingConfig *zap.SamplingConfig) (*Logger, error) {
-	zapLogger, err := newZap(loglevel, encoding, samplingConfig)
+func NewLogger(loglevel, encoding string, samplingConfig *zap.SamplingConfig, fileLogPath string) (*Logger, error) {
+	if fileLogPath == "" {
+		fileLogPath = "stdout"
+	}
+
+	zapLogger, err := newZap(loglevel, encoding, samplingConfig, fileLogPath)
 	if err != nil {
 		return nil, err
 	}
 
-	debugger, err := newZap(zap.DebugLevel.String(), encoding, samplingConfig)
+	debugger, err := newZap(zap.DebugLevel.String(), encoding, samplingConfig, fileLogPath)
 	if err != nil {
 		return nil, err
 	}
@@ -254,7 +258,7 @@ func (l *Logger) IsDynamicDebugEnabled(ctx context.Context) bool {
 
 func init() {
 	var err error
-	globalLogger, err = NewLogger("info", "json", DefaultSamplingConfig())
+	globalLogger, err = NewLogger("info", "json", DefaultSamplingConfig(), "")
 	if err != nil {
 		panic("Failed to create global logger" + err.Error())
 	}
@@ -263,7 +267,7 @@ func init() {
 	globalMetric.samplingCounter = prome.NewCounterHelper(namespace, subsystem, "sampling", labels...)
 }
 
-func newZap(loglevel, encoding string, samplingConfig *zap.SamplingConfig) (*zap.Logger, error) {
+func newZap(loglevel, encoding string, samplingConfig *zap.SamplingConfig, logFilePath string) (*zap.Logger, error) {
 	// Set default encoding if empty
 	if encoding == "" {
 		encoding = "json"
@@ -282,7 +286,7 @@ func newZap(loglevel, encoding string, samplingConfig *zap.SamplingConfig) (*zap
 	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
 
 	cfg := zap.NewProductionConfig()
-	cfg.OutputPaths = []string{"stdout"}
+	cfg.OutputPaths = []string{logFilePath}
 	cfg.EncoderConfig = encoderConfig
 	cfg.Encoding = encoding
 	cfg.Sampling = samplingConfig
