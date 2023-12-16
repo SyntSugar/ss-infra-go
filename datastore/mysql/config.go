@@ -26,7 +26,6 @@ type Config struct {
 }
 
 func (cfg *Config) init() {
-	cfg.Addr = "127.0.0.1:3306"
 	cfg.DialTimeout = 3100 * time.Millisecond
 	cfg.ReadTimeout = 5 * time.Second
 	cfg.WriteTimeout = 5 * time.Second
