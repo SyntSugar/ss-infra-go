@@ -85,6 +85,7 @@ func (srv *Server) setupMiddlewares() error {
 
 	if srv.apiEngine != nil {
 		srv.apiEngine.Use(
+			middleware.CORSMiddleware(),
 			middleware.DynamicDebugLogging,
 			middleware.PanicRecovery(srv.logger),
 			middleware.AccessLog(accessLogger),
@@ -105,6 +106,7 @@ func (srv *Server) setupMiddlewares() error {
 
 	if srv.adminEngine != nil {
 		srv.adminEngine.Use(
+			middleware.CORSMiddleware(),
 			middleware.DynamicDebugLogging,
 			middleware.PanicRecovery(srv.logger),
 			middleware.AccessLog(accessLogger),
